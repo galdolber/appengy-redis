@@ -1,4 +1,4 @@
-(defproject appengy-redis "0.1.1"
+(defproject appengy-redis "0.1.4"
   :description "Redis sessions for Appengy"
   :url "http://github.com/galdolber/appengy-redis"
   :aot :all
