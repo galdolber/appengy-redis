@@ -4,12 +4,12 @@
 
 (deftype RedisSession [session-serializer conf] Session
   (getData [this session k]
-   (require '[redis.core :as redis])
+   (require 'redis.core)
    (redis/with-server (into {} (for [[k v] conf] [(keyword k) v]))
     (if-let [v (redis/hget session k)]
       (.deserialize session-serializer v))))
   (setData [this session k v]
-   (require '[redis.core :as redis])
+   (require 'redis.core)
    (try
      (redis/with-server (into {} (for [[k v] conf] [(keyword k) v]))
       (if v
@@ -21,6 +21,6 @@
             (redis/del session))))
       (catch Exception e nil))))
   (clean [this session]
-   (require '[redis.core :as redis])
+   (require 'redis.core)
    (redis/with-server (into {} (for [[k v] conf] [(keyword k) v]))
     (redis/del session))))
